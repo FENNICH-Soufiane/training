@@ -7,7 +7,7 @@ const { uploadImagesToCloudinary } = require("../utils/uploadImagesToCloudinary"
 
 
 
-exports.createOne = (Model) => {
+exports.createOne = (Model, populate="") => {
    return async (req, res) => {
       try {
          
@@ -60,7 +60,7 @@ exports.getOne = (Model) => {
    }
 }
 
-exports.getAll = (Model, modelName = "") => {
+exports.getAll = (Model, modelName = "", populate = "") => {
    return async (req, res) => {
       try {
          let filter = {};
@@ -73,7 +73,7 @@ exports.getAll = (Model, modelName = "") => {
 
          const documentsCounts = await Model.countDocuments();
          // Créez une instance de ApiFeatures pour appliquer les filtres
-         const apiFeatures = new ApiFeatures(Model.find(filter), req.query)
+         const apiFeatures = new ApiFeatures(Model.find(filter).populate(populate), req.query)
             .filter()
             .sort()
             .limitFields()

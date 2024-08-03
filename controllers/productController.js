@@ -4,7 +4,7 @@ const factory = require("./handlersFactory")
 
 
 
-const getAllProducts = factory.getAll(Product, 'Product')
+const getAllProducts = factory.getAll(Product, 'Product', "category")
 
 const getSingleProduct = factory.getOne(Product);
 

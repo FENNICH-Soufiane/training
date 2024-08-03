@@ -38,12 +38,12 @@ const productSchema = new mongoose.Schema({
     priceAfterDiscount: {
         type: Number,
     },
-    files: [{ type: String }]
-    // category: {
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: "Category",
-    //     required: ["true", "Product must be belong to Category"]
-    // }
+    files: [{ type: String }],
+    category: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Category",
+        required: ["true", "Product must be belong to Category"]
+    }
 }, { timestamps: true });
 
 module.exports = mongoose.model('Product', productSchema);
