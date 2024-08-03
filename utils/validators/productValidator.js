@@ -1,7 +1,7 @@
 const slugify = require('slugify');
 const { check } = require('express-validator');
-const validatorMiddleware = require("../../src/middlewares/validatorMiddleware");
-const Category = require('../../src/models/categoryModel');
+const validatorMiddleware = require("../../middlewares/validatorMiddleware");
+
 
 exports.deleteProductValidator = [
     check('id').isMongoId().withMessage('Invalid ID format'),
@@ -46,14 +46,14 @@ exports.createProductValidator = [
             }
             return true;
         }),
-    check("category")
-        .notEmpty().withMessage("Product must be belong to a category")
-        .isMongoId().withMessage("Invalid ID format")
-        .custom((categoryId) => {
-            Category.findById(categoryId).then((category) => {
-                if (!category) {
-                    return Promise.reject(new Error("no category for this id", categoryId))
-                }
-            })
-        })
+    // check("category")
+    //     .notEmpty().withMessage("Product must be belong to a category")
+    //     .isMongoId().withMessage("Invalid ID format")
+    //     .custom((categoryId) => {
+    //         Category.findById(categoryId).then((category) => {
+    //             if (!category) {
+    //                 return Promise.reject(new Error("no category for this id", categoryId))
+    //             }
+    //         })
+    //     })
 ]
